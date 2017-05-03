@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>07tab标签切换</title>
+	<style>
+		.tab{margin:0 auto;width:400px;border:1px solid #ddd;}
+		.tab .title{border-bottom:2px solid #ddd;overflow:hidden;}
+		.tab .title span{float:left;padding:5px 10px;border-right:1px solid #ddd;}
+		.tab .title span.active{background-color: #fc0;}
+		.tab .content{padding:15px;text-align:center;}
+		.tab .content div{display:none;}
+		.tab .content img{width:300px;}
+	</style>
+	<script src="js/jquery-3.1.1.js"></script>
+	<script>
+	$(function(){
+		var $tab = $('.tab');
+		var $content = $tab.find('.content');
+		var $title = $tab.children('.title');
+
+		// 显示第一张
+		$content.children().eq(0).show();
+		// 高亮第一个tab
+		$title.children().eq(0).addClass('active');
+
+		// 绑定点击事件
+		$title.on('click','>span',function(){
+			// 获取索引值
+			var idx = $(this).index();
+
+			// tab高亮
+			$(this).addClass('active').siblings().removeClass('active');
+
+
+			// 图片切换
+			// $content.children().hide().eq(idx).show();
+			// $content.children().hide().eq(idx).fadeIn(600);
+			$content.children().hide().eq(idx).slideDown();
+		});
+	});
+	</script>
+</head>
+<body>
+	<div class="tab">
+		<div class="title">
+			<span>Tab1</span>
+			<span>Tab2</span>
+			<span>Tab3</span>
+			<span>Tab4</span>
+			<span>Tab5</span>
+		</div>
+		<div class="content">
+			<div><img src="img/g1.jpg" alt=""></div>
+			<div><img src="img/g2.jpg" alt=""></div>
+			<div><img src="img/g3.jpg" alt=""></div>
+			<div><img src="img/g4.jpg" alt=""></div>
+			<div><img src="img/g5.jpg" alt=""></div>
+		</div>
+	</div>
+</body>
+</html>
